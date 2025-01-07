@@ -2,6 +2,7 @@ import tkinter as tk
 from datetime import datetime, timedelta
 
 class StopwatchGUI:
+
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Worklogger Stopwatch")
