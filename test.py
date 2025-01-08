@@ -1,19 +1,14 @@
-import pandas as pd
-from datetime import datetime as dt
+from openpyxl import workbook, load_workbook
+import datetime as dt
 
-# Define the sheet name
-sheet_name = "main"
-# Today's date
-today_date = dt.today().strftime('%d-%m-%Y')
+today_date = dt.datetime.today().strftime('%d/%m/%Y')
 
-open_file = pd.read_excel("Data.xlsx", sheet_name=sheet_name)
+wb = load_workbook("Data.xlsx")
+ws = wb.active
 
-last_row_date = open_file.iloc[-1, 0].strftime('%d-%m-%Y')
-
-def write_to_file(last_row_date, today_date):
-    if last_row_date == today_date:
-        print("Up to date")
-    else:
-        print("Not up to date")
-
-write_to_file(last_row_date, today_date)
+for row in ws.iter_rows(min_row=1, max_row=ws.max_row, min_col=1, max_col=1):
+    for cell in row:
+        if cell.value is None or cell.value == "":
+            print(f"Cell {cell.coordinate} is empty.")
+        else:
+            print(f"Cell {cell.coordinate} has value: {cell.value}")
