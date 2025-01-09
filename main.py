@@ -81,7 +81,23 @@ class StopwatchGUI:
         self.elapsed_time = timedelta()
         self.start_time = None
         self.time_label.config(text="00:00:00.00")
+        
+    def update_time(self):
+        if self.is_running:
+            current_time = datetime.now()
+            time_diff = self.elapsed_time + (current_time - self.start_time)
+            hours = int(time_diff.total_seconds() // 3600)
+            minutes = int((time_diff.total_seconds() % 3600) // 60)
+            seconds = int(time_diff.total_seconds() % 60)
+            hundredths = int((time_diff.total_seconds() * 100) % 100)
+            
+            time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}.{hundredths:02d}"
+            self.time_label.config(text=time_str)
+        
+        self.root.after(10, self.update_time)
     
+    def run(self):
+        self.root.mainloop()
     
 
 if __name__ == "__main__":
