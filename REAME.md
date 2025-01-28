@@ -23,7 +23,7 @@ How to Use
 
     Run the application:
 
-    python stopwatch.py
+    python worklogger.py
 
     Click Start to begin tracking time. The stopwatch will start running.
     Click Finish when you're done. The time will be saved to Data.xlsx (if it's more than 1 minute).
