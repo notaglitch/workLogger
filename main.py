@@ -76,6 +76,15 @@ class StopwatchGUI:
             self.start_time = datetime.now()
     
     def reset(self):
+        if self.elapsed_time.total_seconds() > 0:
+            hours = int(self.elapsed_time.total_seconds() // 3600)
+            minutes = int((self.elapsed_time.total_seconds() % 3600) // 60)
+            seconds = int(self.elapsed_time.total_seconds() % 60)
+            hundredths = int((self.elapsed_time.total_seconds() * 100) % 100)
+
+            print(f"Total time: {minutes:02d}")
+            
+        
         self.is_running = False
         self.start_button.config(text="Start")
         self.elapsed_time = timedelta()
