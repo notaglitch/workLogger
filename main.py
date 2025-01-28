@@ -90,7 +90,7 @@ class StopwatchGUI:
         self.elapsed_time = timedelta()
         self.start_time = None
         self.time_label.config(text="00:00:00.00")
-    
+        
     def update_time(self):
         if self.is_running:
             current_time = datetime.now()
@@ -107,6 +107,7 @@ class StopwatchGUI:
     
     def run(self):
         self.root.mainloop()
+    
 
 if __name__ == "__main__":
     stopwatch = StopwatchGUI()
