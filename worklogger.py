@@ -4,6 +4,7 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 import datetime as dt
 import random
+import os
 
 class StopwatchGUI:
 
@@ -80,7 +81,9 @@ class StopwatchGUI:
 
     def update_excel(self, minutes):
         today_date = dt.datetime.today().strftime('%d/%m/%Y')
-        wb = load_workbook("Data.xlsx")
+        # Use os.path.expanduser to handle iCloud Drive path correctly
+        wb_path = os.path.expanduser("~/iCloudDrive/Downloads/Worklogs.xlsx")
+        wb = load_workbook(wb_path)
         ws = wb.active
 
         def find_first_empty_row(ws):
@@ -94,7 +97,6 @@ class StopwatchGUI:
 
         last_focus_value = ws[f"B{last_row_value}"].value
         last_date_value = ws[f"A{last_row_value}"].value
-
         total_time = minutes
 
         if last_date_value == today_date:
@@ -111,7 +113,7 @@ class StopwatchGUI:
             for cell in ws[col]:
                 cell.alignment = Alignment(horizontal='center')
 
-        wb.save("Data.xlsx")
+        wb.save(wb_path)
 
     def update_time(self):
         if self.is_running:
