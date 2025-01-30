@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 import datetime as dt
+import subprocess
 import random
 import os
 
@@ -81,7 +82,7 @@ class StopwatchGUI:
 
     def update_excel(self, minutes):
         today_date = dt.datetime.today().strftime('%d/%m/%Y')
-        # Use os.path.expanduser to handle iCloud Drive path correctly
+                # Use os.path.expanduser to handle iCloud Drive path correctly
         wb_path = os.path.expanduser("~/iCloudDrive/Downloads/Worklogs.xlsx")
         wb = load_workbook(wb_path)
         ws = wb.active
@@ -139,3 +140,4 @@ class StopwatchGUI:
 if __name__ == "__main__":
     stopwatch = StopwatchGUI()
     stopwatch.run()
+    subprocess.run(r"excel C:\Users\chotd\iCloudDrive\Downloads\Worklogs.xlsx")
